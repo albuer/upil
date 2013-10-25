@@ -1,0 +1,82 @@
+# Copyright 2012, albuer@gmail.cim
+
+LOCAL_PATH:= $(call my-dir)
+
+############# upil ###############
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_SRC_FILES:= \
+    upil_event/upil_event.c \
+    upil_event/upil_event_wrapper.c \
+    tp_protocol.c \
+    state_machine/state_machine.c \
+    state_machine/handler.c \
+    upil_debug.c \
+    upil_sm.c \
+    upil.c \
+    upil_command.c \
+    upil_test.c
+
+LOCAL_SHARED_LIBRARIES := \
+    libcutils
+
+LOCAL_C_INCLUDES := \
+        $(LOCAL_PATH)/include
+
+LOCAL_CFLAGS :=
+
+LOCAL_MODULE:= upil
+
+LOCAL_LDLIBS += -lpthread
+
+include $(BUILD_EXECUTABLE)
+
+############ libupil_ctrl.so #############
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_SRC_FILES:= \
+    upil_ctrl.c
+
+LOCAL_SHARED_LIBRARIES := \
+    libutils \
+    libcutils 
+
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/include
+
+LOCAL_CFLAGS :=
+
+LOCAL_PRELINK_MODULE := false
+
+LOCAL_MODULE:= libupil_ctrl
+
+include $(BUILD_SHARED_LIBRARY)
+
+############# upil_client ###############
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_SRC_FILES:= \
+    upil_client.c
+
+LOCAL_SHARED_LIBRARIES := \
+    libcutils \
+    libupil_ctrl
+
+LOCAL_C_INCLUDES := \
+        $(LOCAL_PATH)/include
+
+LOCAL_CFLAGS :=
+
+LOCAL_MODULE:= upil_client
+
+LOCAL_LDLIBS += -lpthread
+
+include $(BUILD_EXECUTABLE)
+

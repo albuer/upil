@@ -1,0 +1,113 @@
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES:= external/usb_audio/include \
+		system/media/audio_utils/include
+LOCAL_SRC_FILES:= usb_audio_pcm.c
+LOCAL_MODULE := libusb_audio
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libaudioutils
+LOCAL_MODULE_TAGS := optional
+LOCAL_PRELINK_MODULE := false
+
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES:= external/tinyalsa/include
+LOCAL_SRC_FILES:= tinyplay.c
+LOCAL_MODULE := tinyplay
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libtinyalsa
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES:= external/tinyalsa/include
+LOCAL_SRC_FILES:= tinycap.c
+LOCAL_MODULE := tinycap
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libtinyalsa
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES:= external/tinyalsa/include
+LOCAL_SRC_FILES:= tinymix.c
+LOCAL_MODULE := tinymix
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libtinyalsa
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES += \
+        external/tinyalsa/include \
+        system/media/audio_utils/include 
+
+LOCAL_SRC_FILES:= mycap.c
+LOCAL_MODULE := mycap
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libtinyalsa libaudioutils
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES += \
+        external/tinyalsa/include \
+        system/media/audio_utils/include
+
+LOCAL_SRC_FILES:= myplay.c
+LOCAL_MODULE := myplay
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libtinyalsa libaudioutils
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES:= uacap.c
+LOCAL_MODULE := uacap
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libusb_audio
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES:= uaplay.c
+LOCAL_MODULE := uaplay
+LOCAL_SHARED_LIBRARIES:= libcutils libutils libusb_audio
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_EXECUTABLE)
+
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_MODULE := aplay
+
+LOCAL_SRC_FILES := \
+        aplay.cpp 
+
+LOCAL_SHARED_LIBRARIES := \
+        libcutils \
+        libutils \
+        libmedia
+
+LOCAL_C_INCLUDES += frameworks/base/include
+
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := acap
+LOCAL_SRC_FILES := \
+        acap.cpp
+LOCAL_SHARED_LIBRARIES := \
+        libcutils \
+        libutils \
+        libmedia
+LOCAL_C_INCLUDES += frameworks/base/include
+
+include $(BUILD_EXECUTABLE)
+
